@@ -1,0 +1,20 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmartPhone>
+        <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#hasServiceDependencyTo>
+                <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmarWindow1> , <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#AirConditionner> , <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmartLightBulb1> , <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmartLightBulb2> , <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmartDoor> , <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmartWindow2> .
+
+<http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#Alarm>
+        <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#hasServiceDependencyTo>
+                <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmokeSensor> , <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#TempSensor> .
+
+<http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#vocalAssistant>
+        <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#hasServiceDependencyTo>
+                <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmartWindow2> , <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmartDoor> , <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmartLightBulb2> , <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmartLightBulb1> , <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#AirConditionner> , <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmarWindow1> .
+
+<http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#LightControlSystem>
+        <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#hasServiceDependencyTo>
+                <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmartLightBulb2> , <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#MotionSensor2> , <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#MotionSensor1> , <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmartLightBulb1> , <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#LightSensor> .

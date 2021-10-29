@@ -1,0 +1,1027 @@
+@prefix dp: <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#> .
+@prefix dk: <http://www.data-knowledge.org/dk/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix core: <https://saref.etsi.org/core/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix eupont: <http://elite.polito.it/ontologies/eupont.owl#> .
+@base <http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD> .
+
+<http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD> rdf:type owl:Ontology ;
+                                                               rdfs:comment "IoT-D reprensents IoT systems context data that allows inference of dependencies between IoT systems." .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/vocab/vann/example
+vann:example rdf:type owl:AnnotationProperty .
+
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://elite.polito.it/ontologies/eupont.owl#hasAction
+eupont:hasAction rdf:type owl:ObjectProperty ;
+                 rdfs:domain eupont:Rule ,
+                             dp:Application ;
+                 rdfs:range dp:Action ;
+                 rdfs:label "hasAction"@en .
+
+
+###  http://elite.polito.it/ontologies/eupont.owl#hasTrigger
+eupont:hasTrigger rdf:type owl:ObjectProperty ;
+                  rdfs:domain eupont:Rule ;
+                  rdfs:range dp:Trigger ;
+                  rdfs:label "hasTrigger"@en .
+
+
+###  http://www.data-knowledge.org/dk/flowsFrom
+dk:flowsFrom rdf:type owl:ObjectProperty ;
+             rdfs:domain dk:DataFlow ;
+             rdfs:range dp:Action ;
+             vann:example "Master data repository sends out dataset 324"@en ,
+                          "Stammdatenspeicher sendet Datensatz 324"@de ;
+             rdfs:comment "Interface A sends data"@en ,
+                          "Schnittstelle A sendet Daten"@de ;
+             rdfs:isDefinedBy dk: ;
+             rdfs:label "fließt von"@de ,
+                        "flows from"@en .
+
+
+###  http://www.data-knowledge.org/dk/flowsTo
+dk:flowsTo rdf:type owl:ObjectProperty ;
+           rdfs:domain dk:DataFlow ;
+           rdfs:range dp:Action ;
+           vann:example "Dataset 324 is sent to ERP system"@en ,
+                        "Datensatz 324 wird an ERP-System gesendet"@de ;
+           rdfs:comment "Data is sent to Interface B"@en ,
+                        "Daten werden zu Schnittstelle B gesendet"@de ;
+           rdfs:isDefinedBy dk: ;
+           rdfs:label "fließt an"@de ,
+                      "flows to"@en .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#allowsAction
+dp:allowsAction rdf:type owl:ObjectProperty ;
+              rdfs:domain core:Service ;
+              rdfs:range dp:Action ;
+              rdfs:comment "A relationship between a service and an action, a service call allow action execution." .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#changesProperty
+dp:changesProperty rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf core:controlsProperty ;
+                 rdfs:domain core:Device ;
+                 rdfs:range core:Property ;
+                 rdfs:comment """changes the value of a feature of interest property.
+It is a sub property of saref:controlsProperty.""" .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#consumes
+dp:consumes rdf:type owl:ObjectProperty ;
+          rdfs:comment "A relationship between a device and a service." .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#hasApplicationDataDependency
+dp:hasApplicationDataDependency rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#hasChildTrigger
+dp:hasChildTrigger rdf:type owl:ObjectProperty ;
+                 rdfs:domain dp:ComplexTrigger ;
+                 rdfs:range dp:Trigger .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#hasConnectivityDependency
+dp:hasConnectivityDependency rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#hasEnvironmentDependencyTo
+dp:hasEnvironmentDependencyTo rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#hasRule
+dp:hasRule rdf:type owl:ObjectProperty ;
+         rdfs:domain dp:Application ;
+         rdfs:range eupont:Rule .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#hasServiceDependencyTo
+dp:hasServiceDependencyTo rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#hasStateDependencyTo
+dp:hasStateDependencyTo rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#relatedTo
+dp:relatedTo rdf:type owl:ObjectProperty ;
+           rdfs:comment "A relationship between a trigger and state to experss that a trigger occurs at a defined state of the device." .
+
+
+###  https://saref.etsi.org/core/controlsProperty
+core:controlsProperty rdf:type owl:ObjectProperty ;
+                      rdfs:domain core:Device ;
+                      rdfs:range core:Property ;
+                      rdfs:comment "A relationship specifying the property that can be controlled by a certain device"@en ;
+                      rdfs:label "controls property"@en .
+
+
+###  https://saref.etsi.org/core/hasProperty
+core:hasProperty rdf:type owl:ObjectProperty ;
+                 owl:inverseOf core:isPropertyOf ;
+                 rdfs:domain core:FeatureOfInterest ;
+                 rdfs:range core:Property ;
+                 rdfs:comment "A relationship between a feature of interest and a property of that feature"@en ;
+                 rdfs:label "has property"@en .
+
+
+###  https://saref.etsi.org/core/hasState
+core:hasState rdf:type owl:ObjectProperty ;
+              rdfs:domain core:Device ;
+              rdfs:range core:State ;
+              rdfs:comment "A relationship identifying the type of state of a device"@en ;
+              rdfs:label "has state"@en .
+
+
+###  https://saref.etsi.org/core/isOfferedBy
+core:isOfferedBy rdf:type owl:ObjectProperty ;
+                 owl:inverseOf core:offers .
+
+
+###  https://saref.etsi.org/core/isPropertyOf
+core:isPropertyOf rdf:type owl:ObjectProperty .
+
+
+###  https://saref.etsi.org/core/measuresProperty
+core:measuresProperty rdf:type owl:ObjectProperty ;
+                      rdfs:domain core:Device ;
+                      rdfs:range core:Property ;
+                      rdfs:comment "A relationship specifying the property that can be measured by a certain device"@en ;
+                      rdfs:label "measures property"@en .
+
+
+###  https://saref.etsi.org/core/offers
+core:offers rdf:type owl:ObjectProperty ;
+            rdfs:domain core:Device ;
+            rdfs:range core:Service ;
+            rdfs:comment "A relationship between a device and a service"@en ;
+            rdfs:label "offers"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://saref.etsi.org/core/hasManufacturer
+core:hasManufacturer rdf:type owl:DatatypeProperty .
+
+
+###  https://saref.etsi.org/core/hasModel
+core:hasModel rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://elite.polito.it/ontologies/eupont.owl#Action
+eupont:Action rdf:type owl:Class ;
+              rdfs:label "Action"@en .
+
+
+###  http://elite.polito.it/ontologies/eupont.owl#Rule
+eupont:Rule rdf:type owl:Class ;
+            rdfs:label "Rule"@en .
+
+
+###  http://elite.polito.it/ontologies/eupont.owl#Trigger
+eupont:Trigger rdf:type owl:Class ;
+               rdfs:label "Trigger"@en .
+
+
+###  http://www.data-knowledge.org/dk/DataFlow
+dk:DataFlow rdf:type owl:Class ;
+            vann:example "Dataset2837 flows from Central master data repository to ERP system"@en ,
+                         "Datensatz2837 fließt vom zentralen Stammdatenspeicher zum ERP-System"@de ;
+            rdfs:comment "Indicates the actual connection and data exchange between particular applications"@en ,
+                         "Zeigt die tatsächliche Verbindung und den Datenaustausch zwischen konkreten Applikationen an"@de ;
+            rdfs:isDefinedBy dk: ;
+            rdfs:label "Data Flow"@en ,
+                       "Datenfluss"@de .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#Action
+dp:Action rdf:type owl:Class ;
+        rdfs:subClassOf eupont:Action ;
+        rdfs:comment "An action to perform by calling a service of an IoT device." .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#Application
+dp:Application rdf:type owl:Class ;
+             rdfs:comment "An IoT application that compose IoT devices services to create added value/complex services, it can be a trigger-action plateform." .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#ComplexTrigger
+dp:ComplexTrigger rdf:type owl:Class ;
+                rdfs:subClassOf dp:Trigger .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#ConnectivityDevice
+dp:ConnectivityDevice rdf:type owl:Class ;
+                    rdfs:subClassOf core:Device ;
+                    rdfs:comment "A device that connectes home devices to the internet like: gateway, wifiRepeater, hub." .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#ConnectivityService
+dp:ConnectivityService rdf:type owl:Class ;
+                     rdfs:subClassOf core:Service ;
+                     rdfs:comment "A service offred by a connectivityDevice." .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#IoTDevice
+dp:IoTDevice rdf:type owl:Class ;
+           rdfs:subClassOf core:Device ;
+           rdfs:comment "A device that is connected to the internet to share data it can be ether a sensor/actuator/processor or compositition." .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#Processor
+dp:Processor rdf:type owl:Class ;
+           rdfs:subClassOf core:Device ;
+           rdfs:comment "A device that has the capability to perform computation operations on data." .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#Trigger
+dp:Trigger rdf:type owl:Class ;
+         rdfs:subClassOf eupont:Trigger ;
+         rdfs:comment "An event to react to. It is launched when the state of an IoT device changes." .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#triggerActionPlateform
+dp:triggerActionPlateform rdf:type owl:Class ;
+                        rdfs:subClassOf dp:Application ;
+                        rdfs:comment "a kind of IoT application that is composed of rules created by end user." .
+
+
+###  https://saref.etsi.org/core/Actuator
+core:Actuator rdf:type owl:Class ;
+              rdfs:subClassOf dp:IoTDevice ;
+              rdfs:comment "A device responsible for moving or controlling a mechanism or system by performing an actuating function"@en ;
+              rdfs:label "Actuator"@en .
+
+
+###  https://saref.etsi.org/core/CloseState
+core:CloseState rdf:type owl:Class ;
+                rdfs:subClassOf core:OpenCloseState ;
+                rdfs:comment "The state of a device that is CLOSE"@en ;
+                rdfs:label "Close state"@en .
+
+
+###  https://saref.etsi.org/core/Device
+core:Device rdf:type owl:Class ;
+            rdfs:subClassOf [ rdf:type owl:Restriction ;
+                              owl:onProperty core:controlsProperty ;
+                              owl:allValuesFrom core:Property
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty core:hasState ;
+                              owl:allValuesFrom core:State
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty core:measuresProperty ;
+                              owl:allValuesFrom core:Property
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty core:offers ;
+                              owl:allValuesFrom core:Service
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty core:hasManufacturer ;
+                              owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty core:hasModel ;
+                              owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                            ] ;
+            rdfs:comment "A tangible object designed to accomplish a particular task. In order to accomplish this task, the device performs one or more functions. For example, a washing machine is designed to wash (task) and to accomplish this task it performs a start and stop function."@en ;
+            rdfs:label "Device"@en .
+
+
+###  https://saref.etsi.org/core/Energy
+core:Energy rdf:type owl:Class ;
+            rdfs:subClassOf core:Property ;
+            rdfs:comment "A saref:Property related to some measurements that are characterized by a certain value measured in an energy unit (such as Kilowatt_Hour or Watt_hour). Furter specializations of the saref:Energy class can be found in the SAREF4ENER extension, where classes such as EnergyMax, EnergyMin and EnergyExpected are defined. "@en ;
+            rdfs:label "Energy"@en .
+
+
+###  https://saref.etsi.org/core/FeatureOfInterest
+core:FeatureOfInterest rdf:type owl:Class ;
+                       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                         owl:onProperty core:hasProperty ;
+                                         owl:allValuesFrom core:Property
+                                       ] ;
+                       rdfs:comment "A feature of interest represents any real world entity from which a property is measured."@en ;
+                       rdfs:label "Feature of interest"@en .
+
+
+###  https://saref.etsi.org/core/Humidity
+core:Humidity rdf:type owl:Class ;
+              rdfs:subClassOf core:Property ;
+              rdfs:comment "A saref:Property related to some measurements that are characterized by a certain value that is measured in a humidity unit"@en ;
+              rdfs:label "Humidity"@en .
+
+
+###  https://saref.etsi.org/core/Light
+core:Light rdf:type owl:Class ;
+           rdfs:subClassOf core:Property ;
+           rdfs:comment "A saref:Property related to some measurements that are characterized by a certain value that is measured in a illuminance unit (lux)"@en ;
+           rdfs:label "Light"@en .
+
+
+###  https://saref.etsi.org/core/Motion
+core:Motion rdf:type owl:Class ;
+            rdfs:subClassOf core:Property ;
+            rdfs:comment "A saref:Property related to some measurements that are characterized by a certain value that is measured in a unit of measure for motion"@en ;
+            rdfs:label "Motion"@en .
+
+
+###  https://saref.etsi.org/core/MultiLevelState
+core:MultiLevelState rdf:type owl:Class ;
+                     rdfs:subClassOf core:State ;
+                     rdfs:comment "A type of state"@en ;
+                     rdfs:label "Multi level state"@en .
+
+
+###  https://saref.etsi.org/core/Occupancy
+core:Occupancy rdf:type owl:Class ;
+               rdfs:subClassOf core:Property ;
+               rdfs:comment "A saref:Property related to some measurements that are characterized by a certain value (saref:hasValue property) that is measured in a unit of measure for occupancy"@en ;
+               rdfs:label "Occupancy"@en .
+
+
+###  https://saref.etsi.org/core/OffState
+core:OffState rdf:type owl:Class ;
+              rdfs:subClassOf core:OnOffState ;
+              rdfs:comment "The state of a device that is Off"@en ;
+              rdfs:label "Off state"@en .
+
+
+###  https://saref.etsi.org/core/OnOffState
+core:OnOffState rdf:type owl:Class ;
+                rdfs:subClassOf core:State ;
+                rdfs:comment "A type of state"@en ;
+                rdfs:label "On off state"@en .
+
+
+###  https://saref.etsi.org/core/OnState
+core:OnState rdf:type owl:Class ;
+             rdfs:subClassOf core:OnOffState ;
+             rdfs:comment "The state of a device that is On"@en ;
+             rdfs:label "On state"@en .
+
+
+###  https://saref.etsi.org/core/OpenCloseState
+core:OpenCloseState rdf:type owl:Class ;
+                    rdfs:subClassOf core:State ;
+                    rdfs:comment "A type of state"@en ;
+                    rdfs:label "Open close state"@en .
+
+
+###  https://saref.etsi.org/core/OpenState
+core:OpenState rdf:type owl:Class ;
+               rdfs:subClassOf core:OpenCloseState ;
+               rdfs:comment "The state of a device that is OPEN "@en ;
+               rdfs:label "Open state"@en .
+
+
+###  https://saref.etsi.org/core/Power
+core:Power rdf:type owl:Class ;
+           rdfs:subClassOf core:Property ;
+           rdfs:comment "A saref:Property related to some measurements that are characterized by a certain value that is measured in a power unit (such as watt or kilowatt).  Further specializations of the saref:Power class can be found in the SAREF4ENER extension, where classes such as PowerMax, PowerMin and PowerExpected are defined."@en ;
+           rdfs:label "Power"@en .
+
+
+###  https://saref.etsi.org/core/Pressure
+core:Pressure rdf:type owl:Class ;
+              rdfs:subClassOf core:Property ;
+              rdfs:comment "A saref:Property related to some measurements that are characterized by a certain value that is measured in a pressure unit (bar or pascal)"@en ;
+              rdfs:label "Pressure"@en .
+
+
+###  https://saref.etsi.org/core/Price
+core:Price rdf:type owl:Class ;
+           rdfs:subClassOf core:Property ;
+           rdfs:comment "A saref:Property crelated to some measurements that are characterized by a certain value that is measured using saref:Currency"@en ;
+           rdfs:label "Price"@en .
+
+
+###  https://saref.etsi.org/core/Property
+core:Property rdf:type owl:Class ;
+              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                owl:onProperty core:isPropertyOf ;
+                                owl:allValuesFrom core:FeatureOfInterest
+                              ] ;
+              rdfs:comment "A quality of a feature of interest that can be measured; an aspect of a feature of interest that is intrinsic to and cannot exist without the feature"@en ;
+              rdfs:label "Property"@en .
+
+
+###  https://saref.etsi.org/core/Sensor
+core:Sensor rdf:type owl:Class ;
+            rdfs:subClassOf dp:IoTDevice ;
+            rdfs:comment "A device that detects and responds to events or changes in the physical environment such as light, motion, or temperature changes. Further, a device of category saref:Sensor that performs a saref:SensingFunction."@en ;
+            rdfs:label "Sensor"@en .
+
+
+###  https://saref.etsi.org/core/Service
+core:Service rdf:type owl:Class ;
+             rdfs:subClassOf [ rdf:type owl:Restriction ;
+                               owl:onProperty core:isOfferedBy ;
+                               owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass core:Device
+                             ] ;
+             rdfs:comment "A service is a representation of a function to a network that makes the function discoverable, registerable, remotely controllable by other devices in the network. A service can represent one or more functions. A Service is offered by a device that wants (a certain set of) its function(s) to be discoverable, registerable, remotely controllable by other devices in the network. A Service must specify the device that is offering the service and the function(s) to be represented."@en ;
+             rdfs:label "Service"@en .
+
+
+###  https://saref.etsi.org/core/Smoke
+core:Smoke rdf:type owl:Class ;
+           rdfs:subClassOf core:Property ;
+           rdfs:comment "A saref:Property related to some measurements that are characterized by a certain value that is measured in a unit of measure for smoke"@en ;
+           rdfs:label "Smoke"@en .
+
+
+###  https://saref.etsi.org/core/StartState
+core:StartState rdf:type owl:Class ;
+                rdfs:subClassOf core:StartStopState ;
+                rdfs:comment "The state of a device that is STARTED"@en ;
+                rdfs:label "Start state"@en .
+
+
+###  https://saref.etsi.org/core/StartStopState
+core:StartStopState rdf:type owl:Class ;
+                    rdfs:subClassOf core:State ;
+                    rdfs:comment "A type of state"@en ;
+                    rdfs:label "Start stop state"@en .
+
+
+###  https://saref.etsi.org/core/State
+core:State rdf:type owl:Class ;
+           rdfs:comment "The state in which a device can be found, e.g, ON/OFF/STANDBY, or ONLINE/OFFLINE. We propose here a list of states that are relevant for the purpose of SAREF, but this list can be extended."@en ;
+           rdfs:label "State"@en .
+
+
+###  https://saref.etsi.org/core/StopState
+core:StopState rdf:type owl:Class ;
+               rdfs:subClassOf core:StartStopState ;
+               rdfs:comment "The state of a device that is STOPPED"@en ;
+               rdfs:label "Stop state"@en .
+
+
+###  https://saref.etsi.org/core/Temperature
+core:Temperature rdf:type owl:Class ;
+                 rdfs:subClassOf core:Property ;
+                 rdfs:comment "A saref:Property related to some measurements that are characterized by a certain value that is measured in a temperature unit (degree_Celsius, degree_Fahrenheit, or degree_kelvin)"@en ;
+                 rdfs:label "Temperature"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#AC-Off
+dp:AC-Off rdf:type owl:NamedIndividual ,
+                 dp:Trigger ;
+        dp:relatedTo dp:ACoff .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#ACOn
+dp:ACOn rdf:type owl:NamedIndividual ,
+               core:OnState .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#ACoff
+dp:ACoff rdf:type owl:NamedIndividual ,
+                core:OffState .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#AdjustTemp
+dp:AdjustTemp rdf:type owl:NamedIndividual ,
+                     core:Service ;
+            dp:allowsAction dp:adjustTemp .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#AirConditionner
+dp:AirConditionner rdf:type owl:NamedIndividual ,
+                          dp:IoTDevice ,
+                          core:Actuator ;
+                 dp:changesProperty dp:TemperatureRoom ;
+                 dp:consumes dp:ConnectivityGateway ;
+                 core:hasState dp:ACOn ,
+                               dp:ACoff ;
+                 core:offers dp:AdjustTemp ,
+                             dp:SwitchOnOffAC .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#Alarm
+dp:Alarm rdf:type owl:NamedIndividual ,
+                dp:IoTDevice ,
+                dp:Processor ;
+       dp:consumes dp:ConnectvityWIFIRepeater ,
+                 dp:DetectSmoke ,
+                 dp:MeasureTemp ;
+       core:hasState dp:fireAlarm ,
+                     dp:securityAlarm ;
+       core:offers dp:MonitorSecurity .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#ChangeBrightness1
+dp:ChangeBrightness1 rdf:type owl:NamedIndividual ,
+                            core:Service .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#ChangeBrightness2
+dp:ChangeBrightness2 rdf:type owl:NamedIndividual ,
+                            core:Service .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#ChangeLightColor1
+dp:ChangeLightColor1 rdf:type owl:NamedIndividual ,
+                            core:Service ;
+                   dp:allowsAction dp:setColorBulb1Red .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#ChangeLightColor2
+dp:ChangeLightColor2 rdf:type owl:NamedIndividual ,
+                            core:Service ;
+                   dp:allowsAction dp:setColorBulb2Red .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#ConnectivityGateway
+dp:ConnectivityGateway rdf:type owl:NamedIndividual ,
+                              dp:ConnectivityService .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#ConnectvityWIFIRepeater
+dp:ConnectvityWIFIRepeater rdf:type owl:NamedIndividual ,
+                                  dp:ConnectivityService .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#ConrolsLight
+dp:ConrolsLight rdf:type owl:NamedIndividual ,
+                       core:Service .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#DetectPresence1
+dp:DetectPresence1 rdf:type owl:NamedIndividual ,
+                          core:Service .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#DetectPresence2
+dp:DetectPresence2 rdf:type owl:NamedIndividual ,
+                          core:Service .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#DetectSmoke
+dp:DetectSmoke rdf:type owl:NamedIndividual ,
+                      core:Service .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#Gateway
+dp:Gateway rdf:type owl:NamedIndividual ,
+                  dp:ConnectivityDevice ;
+         core:offers dp:ConnectivityGateway .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#IFTTT
+dp:IFTTT rdf:type owl:NamedIndividual ,
+                dp:triggerActionPlateform ;
+       dp:hasRule dp:Rule-001 ,
+                dp:Rule-002 ,
+                dp:Rule-003 .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#Kitchen
+dp:Kitchen rdf:type owl:NamedIndividual ,
+                  core:FeatureOfInterest ;
+         core:hasProperty dp:MotionKitchen ,
+                          dp:SmokeKitchen .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#LightControlSystem
+dp:LightControlSystem rdf:type owl:NamedIndividual ,
+                             dp:IoTDevice ,
+                             dp:Processor ;
+                    dp:consumes dp:ChangeBrightness1 ,
+                              dp:ChangeBrightness2 ,
+                              dp:DetectPresence1 ,
+                              dp:DetectPresence2 ,
+                              dp:MeasureLight ,
+                              dp:SwitcLight1 ,
+                              dp:SwitchLight2 ;
+                    core:offers dp:ConrolsLight .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#LightKitchen
+dp:LightKitchen rdf:type owl:NamedIndividual ,
+                       core:Light .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#LightRoom
+dp:LightRoom rdf:type owl:NamedIndividual ,
+                    core:Light .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#LightSensor
+dp:LightSensor rdf:type owl:NamedIndividual ,
+                      dp:IoTDevice ,
+                      core:Sensor ;
+             dp:consumes dp:ConnectivityGateway ;
+             core:measuresProperty dp:LightRoom ;
+             core:offers dp:MeasureLight .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#MeasureLight
+dp:MeasureLight rdf:type owl:NamedIndividual ,
+                       core:Service .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#MeasureTemp
+dp:MeasureTemp rdf:type owl:NamedIndividual ,
+                      core:Service ;
+             dp:allowsAction dp:getTemp .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#MonitorSecurity
+dp:MonitorSecurity rdf:type owl:NamedIndividual ,
+                          core:Service .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#MotionKitchen
+dp:MotionKitchen rdf:type owl:NamedIndividual ,
+                        core:Motion .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#MotionRoom
+dp:MotionRoom rdf:type owl:NamedIndividual ,
+                     core:Motion ;
+            core:hasState dp:isHere2 ,
+                          dp:isNotHere2 ;
+            core:measuresProperty dp:MotionKitchen ;
+            core:offers dp:DetectPresence2 .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#MotionSensor1
+dp:MotionSensor1 rdf:type owl:NamedIndividual ,
+                        dp:IoTDevice ,
+                        core:Sensor ;
+               dp:consumes dp:ConnectivityGateway ;
+               core:hasState dp:isHere1 ,
+                             dp:isNotHere1 ;
+               core:measuresProperty dp:MotionRoom ;
+               core:offers dp:DetectPresence1 .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#MotionSensor2
+dp:MotionSensor2 rdf:type owl:NamedIndividual ,
+                        dp:IoTDevice ,
+                        core:Sensor ;
+               dp:consumes dp:ConnectvityWIFIRepeater ;
+               core:hasState dp:isHere2 ,
+                             dp:isNotHere2 ;
+               core:measuresProperty dp:MotionKitchen ;
+               core:offers dp:DetectPresence2 .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#NotAtHome
+dp:NotAtHome rdf:type owl:NamedIndividual ,
+                    dp:Trigger .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#OpenCloseDoor
+dp:OpenCloseDoor rdf:type owl:NamedIndividual ,
+                        core:Service ;
+               dp:allowsAction dp:closedoor ,
+                             dp:opendoor .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#OpenCloseWindow1
+dp:OpenCloseWindow1 rdf:type owl:NamedIndividual ,
+                           core:Service ;
+                  dp:allowsAction dp:closewindow1 ,
+                                dp:openwindow1 .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#OpenCloseWindow2
+dp:OpenCloseWindow2 rdf:type owl:NamedIndividual ,
+                           core:Service ;
+                  dp:allowsAction dp:closewindow2 ,
+                                dp:openwindow2 .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#Presence
+dp:Presence rdf:type owl:NamedIndividual ,
+                   dp:Trigger ;
+          dp:relatedTo dp:isHere1 ,
+                     dp:isHere2 .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#Room
+dp:Room rdf:type owl:NamedIndividual ,
+               core:FeatureOfInterest ;
+      core:hasProperty dp:LightRoom ,
+                       dp:MotionRoom ,
+                       dp:TemperatureRoom .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#Rule-001
+dp:Rule-001 rdf:type owl:NamedIndividual ,
+                   eupont:Rule ;
+          eupont:hasAction dp:opendoor ,
+                           dp:openwindow1 ,
+                           dp:openwindow2 ;
+          eupont:hasTrigger dp:firealarm .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#Rule-002
+dp:Rule-002 rdf:type owl:NamedIndividual ,
+                   eupont:Rule ;
+          eupont:hasAction dp:openwindow1 ,
+                           dp:openwindow2 ;
+          eupont:hasTrigger dp:AC-Off .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#Rule-003
+dp:Rule-003 rdf:type owl:NamedIndividual ,
+                   eupont:Rule ;
+          eupont:hasAction dp:closedoor ,
+                           dp:closewindow1 ,
+                           dp:closewindow2 ,
+                           dp:setColorBulb1Red ,
+                           dp:setColorBulb2Red ;
+          eupont:hasTrigger dp:complexT .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#Rule-004
+dp:Rule-004 rdf:type owl:NamedIndividual ,
+                   eupont:Rule ;
+          eupont:hasAction dp:switchOffAC ;
+          eupont:hasTrigger dp:NotAtHome .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmarWindow1
+dp:SmarWindow1 rdf:type owl:NamedIndividual ,
+                      dp:IoTDevice ,
+                      core:Actuator ;
+             dp:consumes dp:ConnectivityGateway ;
+             core:offers dp:OpenCloseWindow1 .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmartDoor
+dp:SmartDoor rdf:type owl:NamedIndividual ,
+                    dp:IoTDevice ,
+                    core:Actuator ;
+           dp:consumes dp:ConnectvityWIFIRepeater ;
+           core:offers dp:OpenCloseDoor .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmartLightBulb1
+dp:SmartLightBulb1 rdf:type owl:NamedIndividual ,
+                          dp:IoTDevice ,
+                          core:Actuator ;
+                 dp:changesProperty dp:LightRoom ;
+                 dp:consumes dp:ConnectivityGateway ;
+                 core:offers dp:ChangeBrightness1 ,
+                             dp:ChangeLightColor1 ,
+                             dp:SwitcLight1 .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmartLightBulb2
+dp:SmartLightBulb2 rdf:type owl:NamedIndividual ,
+                          dp:IoTDevice ,
+                          core:Actuator ;
+                 dp:changesProperty dp:LightKitchen ;
+                 dp:consumes dp:ConnectvityWIFIRepeater ;
+                 core:offers dp:ChangeBrightness2 ,
+                             dp:ChangeLightColor2 ,
+                             dp:SwitchLight2 .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmartPhone
+dp:SmartPhone rdf:type owl:NamedIndividual ,
+                     dp:IoTDevice ,
+                     dp:Processor ;
+            dp:consumes dp:AdjustTemp ,
+                      dp:ChangeBrightness1 ,
+                      dp:ChangeBrightness2 ,
+                      dp:OpenCloseDoor ,
+                      dp:OpenCloseWindow1 ,
+                      dp:OpenCloseWindow2 ,
+                      dp:SwitcLight1 ,
+                      dp:SwitchLight2 .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmartWindow2
+dp:SmartWindow2 rdf:type owl:NamedIndividual ,
+                       dp:IoTDevice ,
+                       core:Actuator ;
+              dp:consumes dp:ConnectvityWIFIRepeater ;
+              core:offers dp:OpenCloseWindow2 .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmokeKitchen
+dp:SmokeKitchen rdf:type owl:NamedIndividual ,
+                       core:Smoke .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SmokeSensor
+dp:SmokeSensor rdf:type owl:NamedIndividual ,
+                      dp:IoTDevice ,
+                      core:Sensor ;
+             dp:consumes dp:ConnectvityWIFIRepeater ;
+             core:hasState dp:thereIsNotSmoke ,
+                           dp:thereIsSmoke ;
+             core:measuresProperty dp:SmokeKitchen ;
+             core:offers dp:DetectSmoke .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SwitcLight1
+dp:SwitcLight1 rdf:type owl:NamedIndividual ,
+                      core:Service .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SwitchLight2
+dp:SwitchLight2 rdf:type owl:NamedIndividual ,
+                       core:Service .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#SwitchOnOffAC
+dp:SwitchOnOffAC rdf:type owl:NamedIndividual ,
+                        core:Service ;
+               dp:allowsAction dp:switchOffAC .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#Temp
+dp:Temp rdf:type owl:NamedIndividual ,
+               dp:Application ;
+      eupont:hasAction dp:adjustTemp ,
+                       dp:getTemp ;
+      dp:hasRule dp:Rule-004 .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#TempSensor
+dp:TempSensor rdf:type owl:NamedIndividual ,
+                     dp:IoTDevice ,
+                     core:Sensor ;
+            dp:consumes dp:ConnectivityGateway ;
+            core:measuresProperty dp:TemperatureRoom ;
+            core:offers dp:MeasureTemp .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#TemperatureRoom
+dp:TemperatureRoom rdf:type owl:NamedIndividual ,
+                          core:Temperature .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#WifiRepeater
+dp:WifiRepeater rdf:type owl:NamedIndividual ,
+                       dp:ConnectivityDevice ;
+              dp:consumes dp:ConnectivityGateway ;
+              core:offers dp:ConnectvityWIFIRepeater .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#adjustTemp
+dp:adjustTemp rdf:type owl:NamedIndividual ,
+                     dp:Action .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#closedoor
+dp:closedoor rdf:type owl:NamedIndividual ,
+                    dp:Action .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#closewindow1
+dp:closewindow1 rdf:type owl:NamedIndividual ,
+                       dp:Action .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#closewindow2
+dp:closewindow2 rdf:type owl:NamedIndividual ,
+                       dp:Action .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#complexT
+dp:complexT rdf:type owl:NamedIndividual ,
+                   dp:ComplexTrigger ;
+          dp:hasChildTrigger dp:NotAtHome ,
+                           dp:Presence .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#fireAlarm
+dp:fireAlarm rdf:type owl:NamedIndividual ,
+                    core:State .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#firealarm
+dp:firealarm rdf:type owl:NamedIndividual ,
+                    dp:Trigger ;
+           dp:relatedTo dp:fireAlarm .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#getTemp
+dp:getTemp rdf:type owl:NamedIndividual ,
+                  dp:Action .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#isHere1
+dp:isHere1 rdf:type owl:NamedIndividual ,
+                  core:State .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#isHere2
+dp:isHere2 rdf:type owl:NamedIndividual ,
+                  core:State .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#isNotHere1
+dp:isNotHere1 rdf:type owl:NamedIndividual ,
+                     core:State .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#isNotHere2
+dp:isNotHere2 rdf:type owl:NamedIndividual ,
+                     core:State .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#opendoor
+dp:opendoor rdf:type owl:NamedIndividual ,
+                   dp:Action ;
+          dp:allowsAction dp:adjustTemp .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#openwindow1
+dp:openwindow1 rdf:type owl:NamedIndividual ,
+                      dp:Action .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#openwindow2
+dp:openwindow2 rdf:type owl:NamedIndividual ,
+                      dp:Action .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#securityAlarm
+dp:securityAlarm rdf:type owl:NamedIndividual ,
+                        core:State .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#setColorBulb1Red
+dp:setColorBulb1Red rdf:type owl:NamedIndividual ,
+                           dp:Action .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#setColorBulb2Red
+dp:setColorBulb2Red rdf:type owl:NamedIndividual ,
+                           dp:Action .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#switchOffAC
+dp:switchOffAC rdf:type owl:NamedIndividual ,
+                      dp:Action .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#temp
+dp:temp rdf:type owl:NamedIndividual ,
+               dk:DataFlow ;
+      dk:flowsFrom dp:getTemp ;
+      dk:flowsTo dp:adjustTemp .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#thereIsNotSmoke
+dp:thereIsNotSmoke rdf:type owl:NamedIndividual ,
+                          core:State .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#thereIsSmoke
+dp:thereIsSmoke rdf:type owl:NamedIndividual ,
+                       core:State .
+
+
+###  http://www.semanticweb.org/OrangeLab/ontologies/2021/9/IoTD#vocalAssistant
+dp:vocalAssistant rdf:type owl:NamedIndividual ,
+                         dp:IoTDevice ,
+                         dp:Processor ;
+                dp:consumes dp:AdjustTemp ,
+                          dp:ChangeBrightness1 ,
+                          dp:ChangeBrightness2 ,
+                          dp:OpenCloseDoor ,
+                          dp:OpenCloseWindow1 ,
+                          dp:OpenCloseWindow2 ,
+                          dp:SwitcLight1 ,
+                          dp:SwitchLight2 ,
+                          dp:SwitchOnOffAC .
